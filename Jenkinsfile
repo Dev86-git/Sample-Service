@@ -31,6 +31,7 @@ pipeline {
                 sh 'mvn spring-boot:run '
 
             }
-        }
-    }
+        }
+    }
 }
+
