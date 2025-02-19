@@ -3,9 +3,10 @@ pipeline {
     stages {
         stage('Checkout') {             
             steps {
-                sh "rm -rf Sample-Service"
-                sh "git clone https://github.com/Dev86-git/Sample-Service.git"
-				 sh "cd Sample-Service"
+              //  sh "rm -rf Sample-Service"
+             //   sh "git clone https://github.com/Dev86-git/Sample-Service.git"
+		//		 sh "cd Sample-Service"
+		    checkoutcode()
             }
         }
 		    stage('Set up Environment') {
@@ -14,9 +15,22 @@ pipeline {
 	        sh 'export MAVEN_HOME=/usr/share/maven'           
         }
     }
+	             stage('setupjava17') {
+            steps {
+                setupjava('openjdk-17-jdk')
+            }
+        }
+        stage('setupmaven') {
+            steps {
+                //   echo " installing maveen"
+                //sh "sudo apt install -y maven"
+                setupjava('maven')
+            }
+        }
            stage('build') {             
             steps {               
-                sh "mvn clean package"
+              //  sh "mvn clean package"
+		    buildproject()
                   }
         }
 	           stage('Upload Artifact') {
